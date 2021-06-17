@@ -12,15 +12,6 @@ class DictionaryNode:
 #=============================================#
                 #HASH-KEY
 #=============================================#
-#direccionamiento abierto
-    #lineal Probing
-    #cuadrating Probing
-    #Doble Hashing  k(k,i)= (h1(k) + i*h2(k)) mod m
-def doble_hasing_key(key,m):
-    
-    return
-    
-
 #colisiones por encadenamiento
 def hash_Key(key,m):
     if type(key)==int:

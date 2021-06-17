@@ -131,14 +131,105 @@ def getBiggestIslandLen(string):
 def isAnagram(string, subString):
 
     pass
+        #==========================#
+                #Ejercicio5
+        #==========================#
+def verifyBalancedParentheses(string):
+    hash_table=Array(2,Dictionary() )
 
+    """
+    #En este codigo voy a tomar dos valores posibles:
+    si es "(" suma 1 al contador, si es ")" resta 1 al contador
+    si es "*" no hace nada 
 
+    como la tabla hash solo tiene dos valores, el contador de par de parentesis y letra aleatorio, va a recorrer el string
+    una unica vez, si en algun momento el contador de par de parentesis <0 el ciclo se detiene y se da como falso
+    en caso contario al terminar el ciclo y ser distinto de 0 quiere decir que no hay la misma cantidad de pares y se da como falso el restutado
+    se van a tomar los valores H[0] para caracteres aleatorios y H[1] para par de parentesis
+    siendo key= a para par de parentesis y key=b para caracteres aleatorios
+    """
+    for element in string:
+        if element =="(" or element==")":
+            count= dictSearch(hash_table,"a")
+            if count and count >= 0:
+                if element=="(":
+                    dictUpdate(hash_table,"a",count +1)
+                else:
+                    dictUpdate(hash_table,"a",count -1)
+            else:
+                if not count:
+                #inserta el primer elemento en caso de ser "("
+                    if element=="(":
+                        dictInsert(hash_table,"a",1)
+                    else: 
+                        return False
+                else:
+                    return False                
+        else:    
+            count= dictSearch(hash_table,"b")
+            if count:
+                dictUpdate(hash_table,"b",count+1)
+            else:
+                dictInsert(hash_table,"b",1)
+    
+    print("PRINT HASHTABLE")
+    print("[",end="")
+    for element in hash_table:
+        if element:
+            print("(",element.head.value.key,":",element.head.value.value,end="),")
+        else:
+            print("( NONE )",end=",")
+    print("]")
+    
+    if hash_table[1].head.value.value==0:
+        return True
+    else:
+        return False
+        #==========================#
+                #Ejercicio6
+        #==========================#
+def reduceLen(string):
+
+    count=0
+    prev_element=""
+    new_string=""
+    for element in string:
+        if prev_element=="":
+            prev_element=element
+            count += 1
+        else:
+            if element==prev_element:
+                count += 1
+            else:
+                if count % 2 !=0:
+                    new_string += prev_element
+
+                prev_element= element
+                count=1
+    if count % 2!= 0:
+        new_string += prev_element
+
+    return new_string
 #======================================================#
 
 if __name__ == '__main__':
+
+    """
     
     print("is Palindrome de \"anitalavalatina\"",isPalindrome("anitalavalatina"))
             
     print("el caracter mas repetido en \"aaabcddba\": ",mostRepeatedChar("aaabcddba"))
 
     print("la isla mas grande en \"cdaaaaaasssbbb\": ",getBiggestIslandLen("cdaaaaaasssbbb"))
+
+    """
+
+    hola= "(ccc(ccc)cc((ccc(c))))"
+
+    print("la cadena \"",hola,"\" tiene sus parentesis balanceados : ", verifyBalancedParentheses( hola ))
+
+    hola= ")ccc(ccc)cc((ccc(c)))("
+
+    print("la cadena \"",hola,"\" tiene sus parentesis balanceados : ", verifyBalancedParentheses( hola ))
+
+    print("la cadena \"  aaabccdabbddd \" se va a reducir a: ",reduceLen("aaabccdabbddd"))
