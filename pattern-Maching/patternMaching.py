@@ -5,6 +5,16 @@ from myarray import *
 from mydictionary import *
 
 #======================================================#
+#======================================================#
+#funciones universales
+#crea una tabla hash con los elementos comprimidos:
+
+
+#======================================================#
+#======================================================#
+
+
+
 
         #==========================#
                 #Ejercicio1
@@ -70,8 +80,58 @@ def mostRepeatedChar(string):
         #==========================#
                 #Ejercicio4
         #==========================#
-def getBiggestIslandLen(String):
+def getBiggestIslandLen(string):
+
+    hash_string = Array(len(string),Dictionary())
+    preview_element=""
+    count= 0
+    for element in string:
+        if preview_element=="":
+            preview_element= element
+            count = 1
+        elif element== preview_element:
+            count += 1
+        else:
+            dictInsert(hash_string,preview_element,count)
+            preview_element= element
+            count= 1
+    
+    if string[len(string)-1]== string[len(string)-2]:
+        dictInsert(hash_string,preview_element,count)
+
+    print("PRINT HASHTABLE")
+    print("[",end="")
+    for element in hash_string:
+        if element:
+            print("(",element.head.value.key,":",element.head.value.value,end="),")
+        else:
+            print("( NONE )",end=",")
+    print("]")
+
+    max_count=0
+    max_element=""
+    for element in hash_string:
+        if element:
+            element=element.head
+            while element:
+                if max_element=="":
+                    max_element=element.value.key
+                    max_count=element.value.value
+                elif element.value.value > max_count:
+                    max_element=element.value.key
+                    max_count=element.value.value
+                element= element.nextNode
+
+    print("max_element: ",max_element, "==> max_count: ",max_count)
+
+    return max_count
+        #==========================#
+                #Ejercicio5
+        #==========================#
+def isAnagram(string, subString):
+
     pass
+
 
 #======================================================#
 
@@ -79,4 +139,6 @@ if __name__ == '__main__':
     
     print("is Palindrome de \"anitalavalatina\"",isPalindrome("anitalavalatina"))
             
-    print("el caracter mas repetido en \"aaabcddba\": ",mostRepeatedChar("aaabcddba"))  
+    print("el caracter mas repetido en \"aaabcddba\": ",mostRepeatedChar("aaabcddba"))
+
+    print("la isla mas grande en \"cdaaaaaasssbbb\": ",getBiggestIslandLen("cdaaaaaasssbbb"))
