@@ -132,7 +132,7 @@ def isAnagram(string, subString):
 
     pass
         #==========================#
-                #Ejercicio5
+                #Ejercicio6
         #==========================#
 def verifyBalancedParentheses(string):
     hash_table=Array(2,Dictionary() )
@@ -186,7 +186,7 @@ def verifyBalancedParentheses(string):
     else:
         return False
         #==========================#
-                #Ejercicio6
+                #Ejercicio7
         #==========================#
 def reduceLen(string):
 
@@ -210,6 +210,25 @@ def reduceLen(string):
         new_string += prev_element
 
     return new_string
+        #==========================#
+                #Ejercicio8
+        #==========================#
+def isContained(string,string_patron):
+    estado= len(string_patron)
+
+    count_estados=0
+    for element in string:
+        if element== string_patron[count_estados]:
+            count_estados+= 1
+        
+        if count_estados == ( len(string_patron) ):
+            return True
+
+        if count_estados+1 < len(string_patron):
+            if element== string_patron[count_estados + 1]:
+                return False
+
+    return False
 #======================================================#
 
 if __name__ == '__main__':
