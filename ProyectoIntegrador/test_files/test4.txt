@@ -1,5 +1,0 @@
-receta
-algoritmo
-casa
-test
-hola

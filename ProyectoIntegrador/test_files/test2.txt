@@ -1,4 +1,0 @@
-algo
-casa
-algoritmo
-hola
